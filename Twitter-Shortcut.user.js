@@ -9,8 +9,8 @@
 // ==/UserScript==
 
 var pXPathStr;
-var shortcutKey1 = 'd';
-var shortcutKey2 = 'l';
+var shortcutKey1 = 'd';     //download and like
+var shortcutKey2 = 'l';     //like
 var disableKey = false;
 var INPUTS = ['INPUT', 'TEXTAREA'];
 var elm;
