@@ -11,6 +11,7 @@
 var pXPathStr;
 var shortcutKey1 = 'd';     //download and like
 var shortcutKey2 = 'l';     //like
+var shortcutKey3 = 'r';     //return
 var disableKey = false;
 var INPUTS = ['INPUT', 'TEXTAREA'];
 var elm;
@@ -18,34 +19,56 @@ var elm;
 document.addEventListener('keydown', function (e) {
     var pressed = String.fromCharCode(e.which).toLowerCase();
     pressed = (e.ctrlKey ? 'C-' : '') + (e.altKey ? 'A-' : '') + (e.shiftKey ? 'S-' : '') + pressed;
-    if (INPUTS.indexOf(e.target.tagName) == -1 && (pressed == shortcutKey1 || pressed == shortcutKey2 )) {
+    if (INPUTS.indexOf(e.target.tagName) == -1 && (pressed == shortcutKey1 || pressed == shortcutKey2 || pressed == shortcutKey3 )) {
         e.preventDefault();
         if (!disableKey) {
             disableKey = true;
             pXPathStr = getXpath(elm);
             var u=0;
-            for(var t=0;t<14;++t){
-                while(pXPathStr[u]!='/'){
-                    ++u;
-                    if(u>300) {
-                        disableKey = false;
-                        return;
+            switch(pressed){
+              case shortcutKey1:
+              case shortcutKey2:
+                for(var t=0;t<14;++t){
+                    while(pXPathStr[u]!='/'){
+                        ++u;
+                        if(u>300) {
+                            disableKey = false;
+                            return;
+                        }
                     }
+                    ++u;
                 }
-                ++u;
-            }
-            --u;
-            pXPathStr=pXPathStr.substr(0,u);
-            var likeXpath = pXPathStr + "/div/div/footer/ul/li[3]/a";
-            var dlXpath = pXPathStr + "/div/div/footer/ul/li[4]/a";
+                --u;
+                pXPathStr=pXPathStr.substr(0,u);
+                var likeXpath = pXPathStr + "/div/div/footer/ul/li[3]/a";
+                var dlXpath = pXPathStr + "/div/div/footer/ul/li[4]/a";
 
-            var elemFound = document.evaluate(likeXpath, document, null, 0, null).iterateNext();
-            elemFound.click();
+                var elemFound = document.evaluate(likeXpath, document, null, 0, null).iterateNext();
+                elemFound.click();
 
-            if(pressed != shortcutKey2){
-              var elemFound2 = document.evaluate(dlXpath, document, null, 0, null).iterateNext();
-              elemFound2.click();
+                if(pressed != shortcutKey2){
+                  var elemFound2 = document.evaluate(dlXpath, document, null, 0, null).iterateNext();
+                  elemFound2.click();
+                }
+                break;
+              case shortcutKey3:
+                for(var t=0;t<10;++t){
+                    while(pXPathStr[u]!='/'){
+                        ++u;
+                        if(u>300) {
+                            disableKey = false;
+                            return;
+                        }
+                    }
+                    ++u;
+                }
+                --u;
+                pXPathStr=pXPathStr.substr(0,u);
+                var retXpath = pXPathStr + "/header/a";
+                var elemFound = document.evaluate(retXpath, document, null, 0, null).iterateNext();
+                elemFound.click();
             }
+
             disableKey = false;
         }
     }
