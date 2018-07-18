@@ -4,3 +4,6 @@
 * d -> like and download the media of the tweet on your cursor.
 
 If you use media-download-shortcut, you make download button by BetterTweetDeck.
+
+#### usage
+Put in Tampermonkey or greasemonkey.
