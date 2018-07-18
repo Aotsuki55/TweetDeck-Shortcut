@@ -8,18 +8,26 @@
 // @grant        none
 // ==/UserScript==
 
-var pXPathStr;
-var shortcutKey1 = 'd';     //download and like
+var shortcutKey1 = 'o';     //download and like
 var shortcutKey2 = 'l';     //like
-var shortcutKey3 = 'r';     //return
+var shortcutKey3 = 'b';     //back
+var shortcutKey4 = 'c';     //clear
+
+
+var pXPathStr;
 var disableKey = false;
 var INPUTS = ['INPUT', 'TEXTAREA'];
 var elm;
+var elemFound;
+var num = 0;
 
 document.addEventListener('keydown', function (e) {
     var pressed = String.fromCharCode(e.which).toLowerCase();
     pressed = (e.ctrlKey ? 'C-' : '') + (e.altKey ? 'A-' : '') + (e.shiftKey ? 'S-' : '') + pressed;
-    if (INPUTS.indexOf(e.target.tagName) == -1 && (pressed == shortcutKey1 || pressed == shortcutKey2 || pressed == shortcutKey3 )) {
+    if (pressed != shortcutKey4){
+      num=0;
+    }
+    if (INPUTS.indexOf(e.target.tagName) == -1 && (pressed == shortcutKey1 || pressed == shortcutKey2 || pressed == shortcutKey3 || pressed == shortcutKey4 )) {
         e.preventDefault();
         if (!disableKey) {
             disableKey = true;
@@ -43,12 +51,16 @@ document.addEventListener('keydown', function (e) {
                 var likeXpath = pXPathStr + "/div/div/footer/ul/li[3]/a";
                 var dlXpath = pXPathStr + "/div/div/footer/ul/li[4]/a";
 
-                var elemFound = document.evaluate(likeXpath, document, null, 0, null).iterateNext();
-                elemFound.click();
+                elemFound = document.evaluate(likeXpath, document, null, 0, null).iterateNext();
+                if(elemFound){
+                      elemFound.click();
+                }
 
                 if(pressed != shortcutKey2){
-                  var elemFound2 = document.evaluate(dlXpath, document, null, 0, null).iterateNext();
-                  elemFound2.click();
+                  elemFound = document.evaluate(dlXpath, document, null, 0, null).iterateNext();
+                  if(elemFound){
+                        elemFound.click();
+                  }
                 }
                 break;
               case shortcutKey3:
@@ -65,12 +77,39 @@ document.addEventListener('keydown', function (e) {
                 --u;
                 pXPathStr=pXPathStr.substr(0,u);
                 var retXpath = pXPathStr + "/header/a";
-                var elemFound3 = document.evaluate(retXpath, document, null, 0, null).iterateNext();
-                if(elemFound3){
-                    elemFound3.click();
+                elemFound = document.evaluate(retXpath, document, null, 0, null).iterateNext();
+                if(elemFound){
+                    elemFound.click();
                 }
-            }
+                break;
+              case shortcutKey4:
+                for(var v=0;v<10;++v){
+                    while(pXPathStr[u]!='/'){
+                        ++u;
+                        if(u>300) {
+                            disableKey = false;
+                            return;
+                        }
+                    }
+                    ++u;
+                }
+                --u;
+                pXPathStr=pXPathStr.substr(0,u);
+                var clearXpath;
+                if(num==0){
+                  ++num;
+                  clearXpath = pXPathStr + "/header/div/div[1]";
+                }else if(num==1) {
+                  num=0;
+                  clearXpath = pXPathStr + "/header/div/div[2]/a[3]";
+                }
+                elemFound = document.evaluate(clearXpath, document, null, 0, null).iterateNext();
 
+                if(elemFound){
+                        elemFound.click();
+                }
+                break;
+            }
             disableKey = false;
         }
     }
