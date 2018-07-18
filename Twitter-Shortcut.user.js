@@ -52,7 +52,7 @@ document.addEventListener('keydown', function (e) {
                 }
                 break;
               case shortcutKey3:
-                for(var t=0;t<10;++t){
+                for(var s=0;s<10;++s){
                     while(pXPathStr[u]!='/'){
                         ++u;
                         if(u>300) {
@@ -65,8 +65,10 @@ document.addEventListener('keydown', function (e) {
                 --u;
                 pXPathStr=pXPathStr.substr(0,u);
                 var retXpath = pXPathStr + "/header/a";
-                var elemFound = document.evaluate(retXpath, document, null, 0, null).iterateNext();
-                elemFound.click();
+                var elemFound3 = document.evaluate(retXpath, document, null, 0, null).iterateNext();
+                if(elemFound3){
+                    elemFound3.click();
+                }
             }
 
             disableKey = false;
