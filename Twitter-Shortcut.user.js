@@ -27,6 +27,10 @@ document.addEventListener('keydown', function (e) {
             for(var t=0;t<14;++t){
                 while(pXPathStr[u]!='/'){
                     ++u;
+                    if(u>300) {
+                        disableKey = false;
+                        return;
+                    }
                 }
                 ++u;
             }
