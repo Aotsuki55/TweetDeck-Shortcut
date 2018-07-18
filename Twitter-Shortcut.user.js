@@ -8,8 +8,9 @@
 // @grant        none
 // ==/UserScript==
 
-var pXPathStr = '//*[@id="container"]/div/section[1]/div/div[1]/div[1]/div[5]/div/article[1]/div/div/footer/ul/li[3]/a';
-var shortcutKey = 'l';
+var pXPathStr;
+var shortcutKey1 = 'd';
+var shortcutKey2 = 'l';
 var disableKey = false;
 var INPUTS = ['INPUT', 'TEXTAREA'];
 var elm;
@@ -17,17 +18,11 @@ var elm;
 document.addEventListener('keydown', function (e) {
     var pressed = String.fromCharCode(e.which).toLowerCase();
     pressed = (e.ctrlKey ? 'C-' : '') + (e.altKey ? 'A-' : '') + (e.shiftKey ? 'S-' : '') + pressed;
-    if (INPUTS.indexOf(e.target.tagName) == -1 && pressed == shortcutKey) {
+    if (INPUTS.indexOf(e.target.tagName) == -1 && (pressed == shortcutKey1 || pressed == shortcutKey2 )) {
         e.preventDefault();
         if (!disableKey) {
             disableKey = true;
-            //document.getElementById("hdtb-tls").click();
-            //document.getElementByClassName("hdtb-tls").click();
-
-
             pXPathStr = getXpath(elm);
-            //alert(pXPathStr);
-            //pXPathStr = '/html/body/div[3]/div[2]/div[3]/div/section[1]/div/div[1]/div[1]/div[5]/div/article[1]/div/div/footer/ul/li[3]/a/i';
             var u=0;
             for(var t=0;t<14;++t){
                 while(pXPathStr[u]!='/'){
@@ -43,31 +38,19 @@ document.addEventListener('keydown', function (e) {
             var elemFound = document.evaluate(likeXpath, document, null, 0, null).iterateNext();
             elemFound.click();
 
-            var elemFound2 = document.evaluate(dlXpath, document, null, 0, null).iterateNext();
-            elemFound2.click();
-
-            // 処理
+            if(pressed != shortcutKey2){
+              var elemFound2 = document.evaluate(dlXpath, document, null, 0, null).iterateNext();
+              elemFound2.click();
+            }
             disableKey = false;
         }
     }
 }, false);
 
-/*
-document.body.onclick = function ( e ) {
-
-	var x = e.clientX ;
-	var y = e.clientY ;
-	var element = document.elementFromPoint( x, y ) ;
-	alert(element);
-}*/
 
 document.onmouseover = function (e){
     elm = document.elementFromPoint(e.clientX, e.clientY);
 };
-/*
-document.onmousemove = function (e){
-    elm = document.elementFromPoint(e.clientX, e.clientY);
-};*/
 
 
 function getXpath(element) {
@@ -92,4 +75,3 @@ function getXpath(element) {
   }
   return '';
 }
-
