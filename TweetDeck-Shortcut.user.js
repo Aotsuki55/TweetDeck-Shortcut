@@ -1,3 +1,4 @@
+// ==UserScript==
 // @name         TweetDeck-Shortcut
 // @namespace    http://tampermonkey.net/
 // @version      1.0
@@ -121,7 +122,7 @@ document.addEventListener('keydown', function (e) {
                 if(elemFound){
                   elemFound.click();
                   if(num==0){
-                      if(elemFound){
+                      if(elemFound2){
                           elemFound2.click();
                       }
                   }
