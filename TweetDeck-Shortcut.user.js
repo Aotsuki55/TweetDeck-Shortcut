@@ -1,4 +1,3 @@
-// ==UserScript==
 // @name         TweetDeck-Shortcut
 // @namespace    http://tampermonkey.net/
 // @version      1.0
@@ -104,11 +103,19 @@ document.addEventListener('keydown', function (e) {
                 }else if(num==1) {
                   num=2;
                   clearXpath = pXPathStr + "/header/div/div[2]/a[3]";
+                  elemFound = document.evaluate(clearXpath, document, null, 0, null).iterateNext();
+                  if(!elemFound){
+                    clearXpath = clearXpath.slice( 0, -3 );
+                  }
                 }else if(num==2) {
                   num=0;
                   clearXpath = pXPathStr + "/div[1]/div[1]/div[1]/form/fieldset[2]/div[3]/button";
                   clearXpath2 = pXPathStr + "/header/div/div[2]/a[3]";
                   elemFound2 = document.evaluate(clearXpath2, document, null, 0, null).iterateNext();
+                  if(!elemFound2){
+                    clearXpath2 = clearXpath.slice( 0, -3 );
+                    elemFound2 = document.evaluate(clearXpath2, document, null, 0, null).iterateNext();
+                  }
                 }
                 elemFound = document.evaluate(clearXpath, document, null, 0, null).iterateNext();
                 if(elemFound){
