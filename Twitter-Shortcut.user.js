@@ -19,6 +19,7 @@ var disableKey = false;
 var INPUTS = ['INPUT', 'TEXTAREA'];
 var elm;
 var elemFound;
+var elemFound2;
 var num = 0;
 
 document.addEventListener('keydown', function (e) {
@@ -96,17 +97,27 @@ document.addEventListener('keydown', function (e) {
                 --u;
                 pXPathStr=pXPathStr.substr(0,u);
                 var clearXpath;
+                var clearXpath2;
                 if(num==0){
-                  ++num;
+                  num=1;
                   clearXpath = pXPathStr + "/header/div/div[1]";
                 }else if(num==1) {
-                  num=0;
+                  num=2;
                   clearXpath = pXPathStr + "/header/div/div[2]/a[3]";
+                }else if(num==2) {
+                  num=0;
+                  clearXpath = pXPathStr + "/div[1]/div[1]/div[1]/form/fieldset[2]/div[3]/button";
+                  clearXpath2 = pXPathStr + "/header/div/div[2]/a[3]";
+                  elemFound2 = document.evaluate(clearXpath2, document, null, 0, null).iterateNext();
                 }
                 elemFound = document.evaluate(clearXpath, document, null, 0, null).iterateNext();
-
                 if(elemFound){
-                        elemFound.click();
+                  elemFound.click();
+                  if(num==0){
+                      if(elemFound){
+                          elemFound2.click();
+                      }
+                  }
                 }
                 break;
             }
