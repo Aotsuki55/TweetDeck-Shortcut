@@ -23,7 +23,7 @@ TampermonkeyやGreasemonkeyでuser.jsファイルを読み込んでください�
 ### Add shortcut-key on TweetDeck!
 * l -> like the tweet on your cursor.
 * o -> like and download the media of the tweet on your cursor.
-* b -> Back to the TimeLine from detail of the tweet.
+* b -> Back to the TimeLine from tweet details.
 * c -> Clear the column on your cursor.(Please push **3 times**.)
 
 If you use media-download-shortcut, you make download button by BetterTweetDeck.
