@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Twitter-Shortcut
+// @name         TweetDeck-Shortcut
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      1.0
 // @description  To use shortcut-key on TweetDeck!
 // @author       Aotsuki
 // @match        https://tweetdeck.twitter.com/*
