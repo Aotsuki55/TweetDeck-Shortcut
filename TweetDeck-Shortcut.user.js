@@ -114,7 +114,7 @@ document.addEventListener('keydown', function (e) {
                   clearXpath2 = pXPathStr + "/header/div/div[2]/a[3]";
                   elemFound2 = document.evaluate(clearXpath2, document, null, 0, null).iterateNext();
                   if(!elemFound2){
-                    clearXpath2 = clearXpath.slice( 0, -3 );
+                    clearXpath2 = clearXpath2.slice( 0, -3 );
                     elemFound2 = document.evaluate(clearXpath2, document, null, 0, null).iterateNext();
                   }
                 }
