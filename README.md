@@ -1,8 +1,8 @@
-# Twitter-Shortcut
+# TweetDeck-Shortcut
 
 ### TweetDeckのショートカットを追加します
-TweetDeckのショートカット
-
+TweetDeckのショートカットを増やします。
+閲覧用に使っている方にとっては使いやすくなると思います。
 
 ショートカットキー一覧
 * l -> Like (カーソルが載っているTweetを**いいね**します)
@@ -26,6 +26,5 @@ TampermonkeyやGreasemonkeyでuser.jsファイルを読み込んでください�
 
 If you use media-download-shortcut, you make download button by BetterTweetDeck.
 
----
 ### usage
 Put in Tampermonkey or Greasemonkey.
